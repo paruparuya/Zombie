@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Players
+  - Zonbie
   layers:
   - Default
   - TransparentFX
