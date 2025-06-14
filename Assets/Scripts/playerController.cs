@@ -4,8 +4,7 @@ using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.Image;
 
 public class PlayerController : MonoBehaviour
-{
-    [SerializeField] private float jumpForce = 5.0f;
+{ 
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float turnSpeed = 100f;
     [SerializeField] private float animationSpeedMultiplier = 1.0f; // アニメーション用のスピード係数
@@ -15,10 +14,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rayHeight = 1.5f; //レイの高さ
     [SerializeField] private LayerMask interactableLayer; // アイテムのレイヤーを指定
     private ItemPickupUI currentUI = null;
+    private DoorMech currentDoor = null;
 
     private Rigidbody rb;
     private MyControls controls;
     private Animator animator;
+    [SerializeField] private GameManager gameManager;
+
 
     private Vector2 moveInput;
 
@@ -65,11 +67,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            // ドアチェック
-            /*DoorController door = target.GetComponent<DoorController>();
+            
+            DoorMech door = target.GetComponent<DoorMech>();
             currentDoor = door; // 見ているドアを記憶（あれば）
 
-            ChestOpen chest = target.GetComponent<ChestOpen>();
+            /*ChestOpen chest = target.GetComponent<ChestOpen>();
             currentChest = chest;*/
         }
         else
@@ -131,7 +133,8 @@ public class PlayerController : MonoBehaviour
             if (worldItem != null)
             {
                 InventoryItem newItem = worldItem.CreateInventoryItem();
-                InventoryManeger.Instance.AddItem(newItem); //  インベントリに追加
+                InventoryManager.Instance.AddItem(newItem); //  インベントリに追加
+                
             }
             else
             {
@@ -143,11 +146,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // ドアが目の前にあれば開け閉め
-        /*if (currentDoor != null)
+        if (currentDoor != null)
         {
-            currentDoor.ToggleDoor();
+            currentDoor.TryOpen();
         }
-        if (currentChest != null)
+        /*if (currentChest != null)
         {
             currentChest.TryOpenChest();
         }
@@ -173,5 +176,13 @@ public class PlayerController : MonoBehaviour
     public void SetPlayerControl(bool enabled)
     {
         isPlayerControlEnabled = enabled;
+    }
+
+   
+
+    public void ZonbeiTouch()
+    {
+        isPlayerControlEnabled = false;
+
     }
 }

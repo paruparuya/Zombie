@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class InventoryManeger : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
-    public static InventoryManeger Instance; // シングルトンにして他スクリプトから呼びやすく
+    public static InventoryManager Instance; // シングルトンにして他スクリプトから呼びやすく
 
     public List<InventoryItem> items = new List<InventoryItem>(); // 保存するアイテムリスト
 
