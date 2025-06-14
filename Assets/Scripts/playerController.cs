@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer; // アイテムのレイヤーを指定
     private ItemPickupUI currentUI = null;
     private DoorMech currentDoor = null;
+    private CarInteraction currentCar = null;
 
     private Rigidbody rb;
     private MyControls controls;
@@ -71,6 +72,8 @@ public class PlayerController : MonoBehaviour
             DoorMech door = target.GetComponent<DoorMech>();
             currentDoor = door; // 見ているドアを記憶（あれば）
 
+            CarInteraction car = target.GetComponent<CarInteraction>();
+            currentCar = car;
             /*ChestOpen chest = target.GetComponent<ChestOpen>();
             currentChest = chest;*/
         }
@@ -150,6 +153,11 @@ public class PlayerController : MonoBehaviour
         {
             currentDoor.TryOpen();
         }
+        if (currentCar != null)
+        {
+            currentCar.TryInteract();
+        }
+
         /*if (currentChest != null)
         {
             currentChest.TryOpenChest();

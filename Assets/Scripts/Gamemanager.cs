@@ -44,8 +44,7 @@ public class GameManager : MonoBehaviour
 
     private void OnClickPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("Attack入力検出");
-
+        
         if (isGameOver)
         {
             Debug.Log("シーンをリスタートします");
@@ -78,5 +77,10 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         gameOverText.text = "GAME OVER";
         gameOverText.gameObject.SetActive(true);
+    }
+
+    public void TriggerGameClear()
+    {
+
     }
 }
